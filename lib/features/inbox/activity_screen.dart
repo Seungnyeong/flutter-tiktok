@@ -94,17 +94,20 @@ class _ActivityScreenState extends State<ActivityScreen>
       appBar: AppBar(
         title: GestureDetector(
           onTap: _toggleAnimations,
-          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            const Text('All Activity'),
-            Gaps.h2,
-            RotationTransition(
-              turns: _arrowAnimation,
-              child: const FaIcon(
-                FontAwesomeIcons.chevronDown,
-                size: Sizes.size14,
-              ),
-            )
-          ]),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text('All Activity'),
+                Gaps.h2,
+                RotationTransition(
+                  turns: _arrowAnimation,
+                  child: const FaIcon(
+                    FontAwesomeIcons.chevronDown,
+                    size: Sizes.size14,
+                  ),
+                )
+              ]),
         ),
       ),
       body: Stack(
