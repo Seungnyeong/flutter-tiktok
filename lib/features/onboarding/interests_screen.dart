@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/onboarding/tutorial_scrren.dart';
+
 import 'package:tiktok_clone/features/onboarding/widgets/interest_button.dart';
 
 const interests = [
@@ -46,6 +47,9 @@ const interests = [
 ];
 
 class InterestsScreen extends StatefulWidget {
+  static const String routeName = "interests";
+  static const String routeURL = "/tutorial";
+
   const InterestsScreen({super.key});
 
   @override
@@ -56,6 +60,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
   final ScrollController _scrollController = ScrollController();
 
   bool _showTitle = false;
+
   void _onScroll() {
     if (_scrollController.offset > 100) {
       if (_showTitle) return;
@@ -71,10 +76,11 @@ class _InterestsScreenState extends State<InterestsScreen> {
 
   void _onNextTap() {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const TutorialScreen(),
-        ));
+      context,
+      MaterialPageRoute(
+        builder: (context) => const TutorialScreen(),
+      ),
+    );
   }
 
   @override
@@ -95,10 +101,8 @@ class _InterestsScreenState extends State<InterestsScreen> {
       appBar: AppBar(
         title: AnimatedOpacity(
           opacity: _showTitle ? 1 : 0,
-          duration: const Duration(
-            milliseconds: 300,
-          ),
-          child: const Text('Choose your interests'),
+          duration: const Duration(milliseconds: 300),
+          child: const Text("Choose your interests"),
         ),
       ),
       body: Scrollbar(
@@ -109,15 +113,14 @@ class _InterestsScreenState extends State<InterestsScreen> {
             padding: const EdgeInsets.only(
               left: Sizes.size24,
               right: Sizes.size24,
-              top: Sizes.size16,
-              bottom: Sizes.size40,
+              bottom: Sizes.size16,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Gaps.v32,
                 const Text(
-                  "Choose you interests",
+                  "Choose your interests",
                   style: TextStyle(
                     fontSize: Sizes.size40,
                     fontWeight: FontWeight.bold,
@@ -130,7 +133,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
                     fontSize: Sizes.size20,
                   ),
                 ),
-                Gaps.v64,
+                Gaps.v48,
                 Wrap(
                   runSpacing: 15,
                   spacing: 15,
@@ -138,37 +141,35 @@ class _InterestsScreenState extends State<InterestsScreen> {
                     for (var interest in interests)
                       InterestButton(interest: interest)
                   ],
-                ),
+                )
               ],
             ),
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        elevation: 1,
-        child: Padding(
-          padding: const EdgeInsets.only(
-            bottom: Sizes.size40,
-            top: Sizes.size16,
-            left: Sizes.size24,
-            right: Sizes.size24,
-          ),
-          child: GestureDetector(
-            onTap: _onNextTap,
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                vertical: Sizes.size20,
-              ),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-              ),
-              child: const Text(
-                'Next',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: Sizes.size16,
-                ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(
+          bottom: Sizes.size40,
+          top: Sizes.size16,
+          left: Sizes.size24,
+          right: Sizes.size24,
+        ),
+        child: GestureDetector(
+          onTap: _onNextTap,
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              vertical: Sizes.size16 + Sizes.size2,
+            ),
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+            ),
+            child: const Text(
+              'Next',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+                fontSize: Sizes.size16,
               ),
             ),
           ),
