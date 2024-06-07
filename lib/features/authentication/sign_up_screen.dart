@@ -10,7 +10,37 @@ import 'package:tiktok_clone/generated/l10n.dart';
 import 'package:tiktok_clone/utils.dart';
 
 class SignUpScreen extends StatelessWidget {
+  static String routeName = "/";
   const SignUpScreen({super.key});
+
+  void _onLoginTab(BuildContext context, Widget screen) async {
+    final result = await Navigator.of(context).pushNamed(LoginScreen.routeName);
+    print(result);
+  }
+
+  void _onEmailTab(BuildContext context, Widget screen) {
+    // Navigator.of(context).push(
+    //   PageRouteBuilder(
+    //       transitionDuration: const Duration(seconds: 1),
+    //       reverseTransitionDuration: const Duration(seconds: 1),
+    //       pageBuilder: (context, animation, secondaryAnimation) => screen,
+    //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
+    //         final offsetAnimation =
+    //             Tween(begin: const Offset(1, 0), end: Offset.zero)
+    //                 .animate(animation);
+    //         final opacityAnimation =
+    //             Tween(begin: 0.5, end: 1.0).animate(animation);
+    //         return SlideTransition(
+    //             position: offsetAnimation,
+    //             child: FadeTransition(
+    //               opacity: opacityAnimation,
+    //               child: child,
+    //             ));
+    //       }),
+    // );
+
+    Navigator.of(context).pushNamed(UsernameScreen.routeName);
+  }
 
   void _onTapNaivator(BuildContext context, Widget screen) {
     Navigator.of(context).push(
@@ -65,7 +95,7 @@ class SignUpScreen extends StatelessWidget {
                     Gaps.v16,
                     AuthButton(
                       clickFunc: () =>
-                          _onTapNaivator(context, const UsernameScreen()),
+                          _onEmailTab(context, const UsernameScreen()),
                       icon: const FaIcon(FontAwesomeIcons.apple),
                       text: S.of(context).continueWithApple,
                     ),
@@ -106,7 +136,7 @@ class SignUpScreen extends StatelessWidget {
                 Text(S.of(context).alreadyHaveAnAccount),
                 Gaps.h5,
                 GestureDetector(
-                  onTap: () => _onTapNaivator(context, const LoginScreen()),
+                  onTap: () => _onLoginTab(context, const LoginScreen()),
                   child: Text(
                     S.of(context).logIn('male'),
                     style: TextStyle(
