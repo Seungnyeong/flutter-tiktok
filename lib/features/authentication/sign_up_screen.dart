@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/authentication/email_screen.dart';
 import 'package:tiktok_clone/features/authentication/login_screen.dart';
 import 'package:tiktok_clone/features/authentication/username_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
@@ -10,15 +12,15 @@ import 'package:tiktok_clone/generated/l10n.dart';
 import 'package:tiktok_clone/utils.dart';
 
 class SignUpScreen extends StatelessWidget {
-  static String routeName = "/";
+  static String routeURL = "/";
+  static const routeName = "signUp";
   const SignUpScreen({super.key});
 
   void _onLoginTab(BuildContext context, Widget screen) async {
-    final result = await Navigator.of(context).pushNamed(LoginScreen.routeName);
-    print(result);
+    context.push(LoginScreen.routeName);
   }
 
-  void _onEmailTab(BuildContext context, Widget screen) {
+  void _onEmailTab(BuildContext context) {
     // Navigator.of(context).push(
     //   PageRouteBuilder(
     //       transitionDuration: const Duration(seconds: 1),
@@ -39,7 +41,7 @@ class SignUpScreen extends StatelessWidget {
     //       }),
     // );
 
-    Navigator.of(context).pushNamed(UsernameScreen.routeName);
+    context.pushNamed(UsernameScreen.routeName);
   }
 
   void _onTapNaivator(BuildContext context, Widget screen) {
@@ -87,15 +89,14 @@ class SignUpScreen extends StatelessWidget {
                   Gaps.v40,
                   if (orientation == Orientation.portrait) ...[
                     AuthButton(
-                      clickFunc: () =>
-                          _onTapNaivator(context, const UsernameScreen()),
+                      clickFunc: () => _onEmailTab(context),
                       icon: const FaIcon(FontAwesomeIcons.user),
                       text: S.of(context).useEmailPassword,
                     ),
                     Gaps.v16,
                     AuthButton(
                       clickFunc: () =>
-                          _onEmailTab(context, const UsernameScreen()),
+                          _onTapNaivator(context, const UsernameScreen()),
                       icon: const FaIcon(FontAwesomeIcons.apple),
                       text: S.of(context).continueWithApple,
                     ),
@@ -105,8 +106,7 @@ class SignUpScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: AuthButton(
-                            clickFunc: () =>
-                                _onTapNaivator(context, const UsernameScreen()),
+                            clickFunc: () => _onEmailTab(context),
                             icon: const FaIcon(FontAwesomeIcons.user),
                             text: S.of(context).useEmailPassword,
                           ),
