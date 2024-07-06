@@ -1,0 +1,38 @@
+import 'dart:async';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tiktok_clone/features/authentication/repos/authentication_repo.dart';
+
+class SignUpViewModel extends AsyncNotifier<void> {
+  late final AuthenticationRepository _authRepo;
+
+  @override
+  FutureOr<void> build() {
+    _authRepo = ref.read(authRepo);
+    print(_authRepo);
+  }
+
+  Future<void> signUp() async {
+    state = const AsyncValue.loading();
+
+    final form = ref.read(signUpForm);
+
+    try {
+      await _authRepo.signUp(
+        form["email"],
+        form["password"],
+      );
+      state = const AsyncValue.data(null);
+    } catch (error, stackTrace) {
+      state = AsyncValue.error(error, stackTrace);
+      print('SignUp error: $error');
+      print('Stack trace: $stackTrace');
+    }
+  }
+}
+
+final signUpForm = StateProvider((ref) => {});
+
+final signUpProvider = AsyncNotifierProvider<SignUpViewModel, void>(
+  () => SignUpViewModel(),
+);
