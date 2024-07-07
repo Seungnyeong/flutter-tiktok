@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tiktok_clone/features/authentication/repos/authentication_repo.dart';
 import 'package:tiktok_clone/features/videos/view_models/playback_config_vm.dart';
 
 class SettingsScreen extends ConsumerWidget {
@@ -88,31 +90,6 @@ class SettingsScreen extends ConsumerWidget {
               ),
               const AboutListTile(),
               ListTile(
-                title: const Text('Log out (Android)'),
-                textColor: Colors.red,
-                onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: const Text("Are you sure?"),
-                      content: const Text("Please Don't go"),
-                      actions: [
-                        IconButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          icon: const FaIcon(
-                            FontAwesomeIcons.car,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          child: const Text('Yes'),
-                        )
-                      ],
-                    ),
-                  );
-                },
-              ),
-              ListTile(
                 title: const Text('Log out (iOS)'),
                 textColor: Colors.red,
                 onTap: () {
@@ -152,7 +129,10 @@ class SettingsScreen extends ConsumerWidget {
                             child: const Text('Not log out')),
                         CupertinoActionSheetAction(
                             isDefaultAction: true,
-                            onPressed: () => Navigator.of(context).pop(),
+                            onPressed: () {
+                              ref.read(authRepo).signOut();
+                              context.go("/");
+                            },
                             child: const Text('Yes plz.')),
                       ],
                     ),

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/common/widgets/main_navigation/main_navigation_screen.dart';
 import 'package:tiktok_clone/features/authentication/login_screen.dart';
+import 'package:tiktok_clone/features/authentication/repos/authentication_repo.dart';
 import 'package:tiktok_clone/features/authentication/sign_up_screen.dart';
 import 'package:tiktok_clone/features/inbox/activity_screen.dart';
 import 'package:tiktok_clone/features/inbox/chat_detail_screen.dart';
@@ -10,8 +11,21 @@ import 'package:tiktok_clone/features/inbox/chats_screen.dart';
 import 'package:tiktok_clone/features/onboarding/interests_screen.dart';
 import 'package:tiktok_clone/features/videos/views/widgets/video_recording_screen.dart';
 
-final router = Provider((ref) => GoRouter(
-      initialLocation: "/",
+final router = Provider(
+  (ref) {
+    ref.watch(authState);
+    return GoRouter(
+      initialLocation: "/home",
+      redirect: (context, state) {
+        final isLoggedIn = ref.read(authRepo).isLoggedIn;
+        if (!isLoggedIn) {
+          if (state.subloc != SignUpScreen.routeURL &&
+              state.subloc != LoginScreen.routeURL) {
+            return SignUpScreen.routeURL;
+          }
+        }
+        return null;
+      },
       routes: [
         GoRoute(
           name: SignUpScreen.routeName,
@@ -78,4 +92,6 @@ final router = Provider((ref) => GoRouter(
           ),
         ),
       ],
-    ));
+    );
+  },
+);
