@@ -1,3 +1,4 @@
 {
-  "cmake.sourceDirectory": "/Users/sn/workspace/tiktok_clone/linux/flutter"
+  "cmake.sourceDirectory": "/Users/sn/workspace/tiktok_clone/linux/flutter",
+  "java.compile.nullAnalysis.mode": "disabled"
 }
