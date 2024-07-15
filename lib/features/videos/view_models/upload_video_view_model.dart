@@ -38,10 +38,11 @@ class UploadVideoViewModel extends AsyncNotifier<void> {
               creator: userProfile.name,
               creatorUid: user.uid,
               createdAt: DateTime.now().microsecondsSinceEpoch,
-              title: "123123"));
+              title: "asdf"));
         }
       });
-      context.pushReplacement("/home");
+      context.pop();
+      context.pop();
     }
   }
 }
