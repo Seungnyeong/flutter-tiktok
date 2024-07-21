@@ -55,6 +55,7 @@ dependencies:
   github_sign_in: ^0.0.5-dev.4
   flutter_dotenv: ^5.1.0
   cloud_functions: ^5.0.3
+  firebase_messaging: ^15.0.3
 
 dev_dependencies:
   flutter_test:

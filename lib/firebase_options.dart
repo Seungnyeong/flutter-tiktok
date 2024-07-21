@@ -65,11 +65,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBRS9ASrG_9GQ2F5SwSBHuxtG3Mf4IzYrU',
-    appId: '1:260661701993:ios:cd06d1a72ff5701b3ee1f8',
+    appId: '1:260661701993:ios:575d4e939490e91d3ee1f8',
     messagingSenderId: '260661701993',
     projectId: 'sn-tictok-clone',
     storageBucket: 'sn-tictok-clone.appspot.com',
-    iosBundleId: 'com.example.tiktokClone',
+    iosBundleId: 'com.example.tiktokClone3',
   );
 
 }
